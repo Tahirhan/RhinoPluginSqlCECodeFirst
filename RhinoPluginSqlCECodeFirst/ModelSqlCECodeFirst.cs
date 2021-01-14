@@ -8,14 +8,10 @@ namespace RhinoPluginSqlCECodeFirst
     [DbConfigurationType(typeof(DbConfig.SqlCeDbConfiguration))]
     public class ModelSqlCECodeFirst : DbContext
     {
-        // Your context has been configured to use a 'ModelSqlCECodeFirst' connection string from your application's 
-        // configuration file (App.config or Web.config). By default, this connection string targets the 
-        // 'RhinoPluginSqlCECodeFirst.ModelSqlCECodeFirst' database on your LocalDb instance. 
-        // 
-        // If you wish to target a different database and/or database provider, modify the 'ModelSqlCECodeFirst' 
-        // connection string in the application configuration file.
+        // You can change the path
+        static string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
         public ModelSqlCECodeFirst()
-            : base(new SqlCeConnection("Data Source=|DataDirectory|MyDatabase.sdf;Persist Security Info=False;"), contextOwnsConnection: true)
+            : base(new SqlCeConnection("Data Source=|DataDirectory|" + path + "\\MyDatabase.sdf;Persist Security Info=False;"), contextOwnsConnection: true)
         {
             Database.SetInitializer<ModelSqlCECodeFirst>(new CreateDatabaseIfNotExists<ModelSqlCECodeFirst>());
         }
